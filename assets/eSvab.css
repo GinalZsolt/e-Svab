@@ -1,0 +1,23 @@
+main {
+    font-weight: 450;
+    background-color: #99e2b4;
+}
+
+header {
+    background-color: #248277;
+    text-align: center;
+    font-size: 200%;
+    height: 150px;
+    line-height: 150px;
+    color: white;
+    text-shadow: 0 0 3px black;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 80%;
+    letter-spacing: 3px;
+    padding: 8px;
+}
