@@ -44,6 +44,11 @@ router.post('/login',(req,res)=>{
     }
 })
 
+router.get('/logout',(req,res)=>{
+    req.session.loggedIn = false;
+    res.redirect('/')
+})
+
 router.post('/reg',(req,res)=>{
     let newuser={
         username:req.body.name,
