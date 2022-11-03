@@ -8,8 +8,11 @@ router.get('/',(req,res)=>{
     if (!req.app.locals.isMessage) {
         req.app.locals.message = '';
     }
-    ejs.renderFile('views/login.ejs',{app:config.appconfig,err: req.app.locals},(err,data)=>{
-        if (err) res.status(500).send(err)
+    ejs.renderFile('views/login.ejs',{app:config.appconfig,err: req.app.locals,user: req.session },(err,data)=>{
+        if (err) {
+            res.status(500).send(err)
+            console.log(err)
+        }
         else{
             req.app.locals.isMessage = false;
             res.status(200).send(data)
@@ -21,7 +24,7 @@ router.get('/reg',(req,res)=>{
     if (!req.app.locals.isMessage) {
         req.app.locals.message = '';
     }
-    ejs.renderFile('views/registration.ejs', { app: config.appconfig, err: req.app.locals }, (err, data) => {
+    ejs.renderFile('views/registration.ejs', { app: config.appconfig, err: req.app.locals ,user: req.session}, (err, data) => {
         req.app.locals.isMessage = false;
         res.send(data)
     });
