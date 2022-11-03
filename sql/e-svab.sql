@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Nov 03. 20:04
+-- Létrehozás ideje: 2022. Nov 03. 20:41
 -- Kiszolgáló verziója: 10.4.25-MariaDB
 -- PHP verzió: 8.1.10
 
@@ -46,8 +46,26 @@ CREATE TABLE `spendings` (
 CREATE TABLE `spendingtypes` (
   `ID` int(11) NOT NULL,
   `name` varchar(20) COLLATE utf8_hungarian_ci NOT NULL,
+  `diff` tinyint(1) NOT NULL,
   `icon` varchar(50) COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `spendingtypes`
+--
+
+INSERT INTO `spendingtypes` (`ID`, `name`, `diff`, `icon`) VALUES
+(1, 'Fizetés', 1, 'bi-cash-stack'),
+(2, 'Egészségügy', 0, 'bi-heart-pulse'),
+(3, 'Gyógyszerek', 0, 'bi-capsule'),
+(4, 'Tisztálkodás', 0, 'bi-droplet'),
+(5, 'Élelmiszer', 0, 'bi-egg'),
+(6, 'Szórakozás', 0, 'bi-controller'),
+(7, 'Utazás', 0, 'bi-airplane'),
+(8, 'Tankolás', 0, 'bi-fuel-pump'),
+(9, 'Ruha', 0, 'bi-bag'),
+(10, 'Egyéb kiadások', 0, 'bi-three-dots'),
+(11, 'Egyéb keresetek', 1, 'bi-piggy-bank');
 
 -- --------------------------------------------------------
 
@@ -109,7 +127,7 @@ ALTER TABLE `spendings`
 -- AUTO_INCREMENT a táblához `spendingtypes`
 --
 ALTER TABLE `spendingtypes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT a táblához `users`
