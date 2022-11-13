@@ -1,0 +1,42 @@
+<%- include('header') %> 
+
+<h4 class="text-center">Új tranzakció rögzítése</h4>
+
+<form action="/money/newdata" method="post">
+    <div class="row">
+      <div class="offset-lg-3 col-lg-6">
+        <%- include('message') %>
+      </div>
+    </div>
+    <div class="row">  
+      <div class="mb-3 offset-lg-3 col-lg-6">
+        <label for="amount" class="form-label">Tranzakció összege Ft-ban:</label>
+        <input type="number" min="0" class="form-control" name="amount" >
+      </div>
+    </div>
+    <div class="row">    
+      <div class="mb-3 offset-lg-3 col-lg-6">
+        <label for="date" class="form-label">Tranzakció dátuma</label>
+        <input type="date" class="form-control" name="date" >
+      </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 offset-lg-3 col-lg-6">
+            <label for="type" class="form-label">Típus kiválasztása</label>
+            <select class="form-select"  name="typeID">
+                <% types.forEach(type => { %>
+                    <option value="<%= type.ID %>"><%= type.name %> </option>
+                <%}); %> 
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="offset-lg-3 col-lg-4"">
+            <button type="submit" class="btn btn-outline-success">Feltöltés</button>
+        </div>
+    </div>
+
+</form>
+
+<%- include('footer') %> 

@@ -1,11 +1,11 @@
-const express = require('express');
-const config = require('../config.js');
-const ejs = require('ejs');
-const sha1 = require('sha1');
-var mysql = require('mysql');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
+const config = require('../config.js')
+const ejs = require('ejs')
+const sha1 = require('sha1')
+var mysql = require('mysql')
 
-var pool = mysql.createPool(config.dbconfig);
+var pool = mysql.createPool(config.dbconfig)
 
 router.post('/login',(req,res)=>{
     let userdata = {
@@ -17,7 +17,7 @@ router.post('/login',(req,res)=>{
     if (userdata.email==''||userdata.password=='') {
         req.app.locals.message = 'Nincs minden mező kitöltve!'
         req.app.locals.messagetype = 'danger'
-        res.redirect('/');
+        res.redirect('/')
     }
     else{
         pool.query(`SELECT * FROM users WHERE email=? AND password=?`,[userdata.email,sha1(userdata.password)],(err,results)=>{

@@ -32,9 +32,9 @@ USE `2123szft_esvab`;
 CREATE TABLE `spendings` (
   `ID` int(11) NOT NULL,
   `UID` int(11) NOT NULL,
+  `typeID` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `typeID` int(11) NOT NULL
+  `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 -- --------------------------------------------------------
