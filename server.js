@@ -8,6 +8,8 @@ app.use('/assets', express.static(path.join(__dirname , '/assets')));
 app.use('/views', express.static(path.join(__dirname , '/views')));
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/chart.js',express.static(path.join(__dirname,'./node_modules/chart.js/dist/chart.js')))
+
 const appController = require('./controllers/appController.js');
 const userController = require('./controllers/userController.js');
 const moneyController = require('./controllers/moneyController.js');
