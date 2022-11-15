@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const config = require('../config.js')
-const ejs = require('ejs')
 const sha1 = require('sha1')
 var mysql = require('mysql')
 
