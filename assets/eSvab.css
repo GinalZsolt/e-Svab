@@ -1,6 +1,7 @@
 main {
     font-weight: 450;
     background-color: #99E2B4;
+    flex:1 1 auto;
 }
 
 header {
@@ -48,6 +49,11 @@ footer {
     text-align: center;
 }
 .chartBox{
-    max-width: 450px;
+    max-width: 40vw;
     margin:auto;
+}
+#contant{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }

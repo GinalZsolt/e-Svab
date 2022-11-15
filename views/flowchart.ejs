@@ -1,47 +1,62 @@
 <%- include('header') %>
 
 <div class="chartBox">
-    <canvas id="pieChart"></canvas>
+    <canvas id="piechart"></canvas>
 </div>
 
 
 <script src="/chart.js"></script>
 <script>
-    
-    const data = {
-    labels: [
-       <% chartdata.forEach(element => {%>
-           "<%= element.name %>",
-        <%})%>
-    ],
-    datasets: [{
-        
-        data: 
-            [
-                <% chartdata.forEach(element => {%>
-                    <%= element.amount %>,
-                <%})%>
-            ],
-            backgroundColor: [
-                <% chartdata.forEach(element => {%>
-                    'rgb(<%= element.diff==1? "70, 157, 137" : "174, 32, 18" %>)',
-                <%})%>
-            ],
-            hoverOffset: 4
-        }]
-    };
-  
-    const config = {
-        type: 'pie',
-        data: data,
-        options: {
-           
-        }
-    };
+   
+//setup
 
-    const pieChart = new Chart(
-        document.getElementById('pieChart'),
-        config
-    )
-  </script>
+const data = {
+  labels: [
+    <%for (let i = 0; i < chartdata.length; i++) {%>
+      '<%= chartdata[i].name %>',
+    <%}%>
+  ],
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: [
+          <%for (let i = 0; i < chartdata.length; i++) {%>
+            <%= chartdata[i].amount %>,
+          <%}%>
+      ],
+      backgroundColor:[
+          <%for (let i = 0; i < chartdata.length; i++) {%>
+            'rgb(<%= chartdata[i].color %>)',
+          <%}%>
+      ],
+    }
+  ]
+};
+
+//config
+
+const config = {
+  type: 'pie',
+  data: data,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Ehavi költekezés'
+      }
+    }
+  },
+};
+
+
+const myChart = new Chart(
+    document.getElementById('piechart'),
+    config
+  );
+
+</script>
 <%- include('footer') %> 
