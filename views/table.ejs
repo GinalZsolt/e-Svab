@@ -1,0 +1,25 @@
+<%- include('header') %> 
+    <h2 class="mb-3 text-center">Ehavi Tranzakciók</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered ">
+            <thead>
+                <tr class="table-dark">
+                    <th>#</th>
+                    <th>Típus</th>
+                    <th>Dátum</th>
+                    <th>Mennyiség</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < chartdata.length; i++) {%>
+                    <tr class="<%if(chartdata[i].diff==1) {%>table-success <%} else { %>table-danger <% } %> ">
+                        <td><%= i+1 %> </td>
+                        <td><i class="<%= chartdata[i].icon %> "></i> <%= chartdata[i].name %> </td>
+                        <td><%=chartdata[i].date.getFullYear() %>-<%=chartdata[i].date.getMonth() %>-<%=chartdata[i].date.getDate() %> </td>
+                        <td><%= chartdata[i].amount %></td>
+                    </tr>
+                <%} %> 
+            </tbody>
+        </table>
+    </div>
+<%- include('footer') %> 
