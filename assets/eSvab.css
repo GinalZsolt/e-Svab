@@ -57,3 +57,8 @@ footer {
     flex-direction: column;
     min-height: 100vh;
 }
+#calendar{
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}

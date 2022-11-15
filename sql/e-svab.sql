@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Nov 03. 20:41
+-- Létrehozás ideje: 2022. Nov 15. 21:42
 -- Kiszolgáló verziója: 10.4.25-MariaDB
 -- PHP verzió: 8.1.10
 
@@ -30,12 +30,23 @@ USE `2123szft_esvab`;
 --
 
 CREATE TABLE `spendings` (
-  `ID` int(11) NOT NULL,
+  `spendingID` int(11) NOT NULL,
   `UID` int(11) NOT NULL,
   `typeID` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `spendings`
+--
+
+INSERT INTO `spendings` (`spendingID`, `UID`, `typeID`, `amount`, `date`) VALUES
+(1, 1, 1, 10000, '2022-11-13'),
+(2, 1, 7, 5000, '2022-10-31'),
+(3, 1, 5, 7000, '2022-11-02'),
+(4, 1, 11, 5000, '2022-11-13'),
+(5, 1, 9, 1400, '2022-11-15');
 
 -- --------------------------------------------------------
 
@@ -47,25 +58,26 @@ CREATE TABLE `spendingtypes` (
   `ID` int(11) NOT NULL,
   `name` varchar(20) COLLATE utf8_hungarian_ci NOT NULL,
   `diff` tinyint(1) NOT NULL,
-  `icon` varchar(50) COLLATE utf8_hungarian_ci NOT NULL
+  `icon` varchar(50) COLLATE utf8_hungarian_ci NOT NULL,
+  `color` varchar(20) COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
 -- A tábla adatainak kiíratása `spendingtypes`
 --
 
-INSERT INTO `spendingtypes` (`ID`, `name`, `diff`, `icon`) VALUES
-(1, 'Fizetés', 1, 'bi-cash-stack'),
-(2, 'Egészségügy', 0, 'bi-heart-pulse'),
-(3, 'Gyógyszerek', 0, 'bi-capsule'),
-(4, 'Tisztálkodás', 0, 'bi-droplet'),
-(5, 'Élelmiszer', 0, 'bi-egg'),
-(6, 'Szórakozás', 0, 'bi-controller'),
-(7, 'Utazás', 0, 'bi-airplane'),
-(8, 'Tankolás', 0, 'bi-fuel-pump'),
-(9, 'Ruha', 0, 'bi-bag'),
-(10, 'Egyéb kiadások', 0, 'bi-three-dots'),
-(11, 'Egyéb keresetek', 1, 'bi-piggy-bank');
+INSERT INTO `spendingtypes` (`ID`, `name`, `diff`, `icon`, `color`) VALUES
+(1, 'Fizetés', 1, 'bi-cash-stack', '20, 116, 111'),
+(2, 'Egészségügy', 0, 'bi-heart-pulse', '100, 18, 32'),
+(3, 'Gyógyszerek', 0, 'bi-capsule', '110, 20, 35'),
+(4, 'Tisztálkodás', 0, 'bi-droplet', '133, 24, 42'),
+(5, 'Élelmiszer', 0, 'bi-egg', '161, 29, 51'),
+(6, 'Szórakozás', 0, 'bi-controller', '167, 30, 52'),
+(7, 'Utazás', 0, 'bi-airplane', '178, 30, 53'),
+(8, 'Tankolás', 0, 'bi-fuel-pump', '189, 31, 54'),
+(9, 'Ruha', 0, 'bi-bag', '199, 31, 55'),
+(10, 'Egyéb kiadások', 0, 'bi-three-dots', '218, 30, 55'),
+(11, 'Egyéb keresetek', 1, 'bi-piggy-bank', '36, 130, 119');
 
 -- --------------------------------------------------------
 
@@ -97,7 +109,7 @@ INSERT INTO `users` (`ID`, `name`, `email`, `password`, `reg`, `status`) VALUES
 -- A tábla indexei `spendings`
 --
 ALTER TABLE `spendings`
-  ADD PRIMARY KEY (`ID`),
+  ADD PRIMARY KEY (`spendingID`),
   ADD KEY `UID` (`UID`),
   ADD KEY `type` (`typeID`);
 
@@ -121,7 +133,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `spendings`
 --
 ALTER TABLE `spendings`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `spendingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT a táblához `spendingtypes`

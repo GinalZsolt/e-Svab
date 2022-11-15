@@ -9,6 +9,8 @@ app.use('/views', express.static(path.join(__dirname , '/views')));
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/chart.js',express.static(path.join(__dirname,'./node_modules/chart.js/dist/chart.js')))
+app.use('/fullcalendar.js',express.static(path.join(__dirname,'./node_modules/fullcalendar/main.min.js')))
+app.use('/fullcalendar.css',express.static(path.join(__dirname,'./node_modules/fullcalendar/main.css')))
 
 const appController = require('./controllers/appController.js');
 const userController = require('./controllers/userController.js');

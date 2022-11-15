@@ -122,4 +122,28 @@ router.get('/tableview',(req,res)=>{
     }
 })
 
+router.get('/calendar',(req,res)=>{
+    if (req.session.loggedIn) {
+        if (!req.app.locals.isMessage) {
+            req.app.locals.message = ''
+        }
+
+        pool.query(`SELECT * FROM spendings INNER JOIN spendingtypes on spendings.typeID=spendingtypes.ID WHERE UID=${req.session.userid}`,(error,results)=>{
+            if (error) {
+                console.log(error)
+                res.status(500).send(error)
+            }
+            else{
+                ejs.renderFile('views/calendar.ejs', { app: config.appconfig, err: req.app.locals, user: req.session, calendardata:results }, (err, data) => {
+                    req.app.locals.isMessage = false
+                    console.log(results)
+                    res.send(data)
+                });
+            }    
+        })
+    } else {
+        res.redirect('/')
+    }
+})
+
 module.exports = router;

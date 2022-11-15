@@ -1,0 +1,14 @@
+<%- include('header') %> 
+    <link rel="stylesheet" href="/fullcalendar.css">
+    
+    <div id="calendar"></div>
+    
+    <script src="/fullcalendar.js"></script>
+    <script>
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+    </script>
+<%- include('footer') %> 
