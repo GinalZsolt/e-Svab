@@ -134,13 +134,26 @@ router.get('/calendar',(req,res)=>{
                 res.status(500).send(error)
             }
             else{
-                ejs.renderFile('views/calendar.ejs', { app: config.appconfig, err: req.app.locals, user: req.session, calendardata:results }, (err, data) => {
+                ejs.renderFile('views/calendar.ejs', { app: config.appconfig, err: req.app.locals, user: req.session,moment:moment, calendardata:results }, (err, data) => {
                     req.app.locals.isMessage = false
-                    console.log(results)
                     res.send(data)
                 });
             }    
         })
+    } else {
+        res.redirect('/')
+    }
+})
+
+router.get('/passmod',(req,res)=>{
+    if (req.session.loggedIn) {
+        if (!req.app.locals.isMessage) {
+            req.app.locals.message = ''
+        }
+        ejs.renderFile('views/passmod.ejs', { app: config.appconfig, err: req.app.locals, user: req.session }, (err, data) => {
+            req.app.locals.isMessage = false
+            res.send(data)
+        });
     } else {
         res.redirect('/')
     }

@@ -61,4 +61,6 @@ footer {
     background-color: #fff;
     padding: 10px;
     border-radius: 5px;
+    width: 80vw;
+    margin:auto
 }

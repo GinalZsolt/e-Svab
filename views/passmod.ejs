@@ -1,0 +1,32 @@
+<%- include('header') %> 
+
+<h2 class="text-center">Jelsó megváltoztatása</h2>
+
+<form action="/users/passmod" method="post">
+    
+    <div class="row">
+        <div class="mt-3 offset-lg-3 col-lg-6">
+            <%- include('message') %> 
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3 offset-lg-3 col-lg-6">
+          <label for="pass1" class="form-label">Új jelszó</label>
+          <input type="password" class="form-control" name="pass1">
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 offset-lg-3 col-lg-6">
+          <label for="pass2" class="form-label">Új jelszó ismét</label>
+          <input type="password" class="form-control" name="pass2">
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-lg-3 col-lg-4">
+          <button type="submit" class="btn btn-outline-success">Frissítés</button>
+        </div>
+      </div>
+</form>
+
+<%- include('footer') %> 

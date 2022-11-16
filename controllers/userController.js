@@ -101,4 +101,54 @@ router.post('/reg',(req,res)=>{
     }
 })
 
+router.post('/passmod',(req,res)=>{
+    
+    req.app.locals.isMessage = true
+    
+    if (req.body.pass1==""||req.body.pass2=="") {
+            req.app.locals.message = 'Nincs minden mező kitöltve'
+            req.app.locals.messagetype = 'danger'
+            res.redirect('/passmod')
+    }
+    else{
+        if (req.body.pass1!=req.body.pass2) {
+            req.app.locals.message = 'Nem egyezik a két jelszó'
+            req.app.locals.messagetype = 'danger'
+            res.redirect('/passmod')
+        }
+        else{
+            let pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+            if(!req.body.pass1==(pattern)){
+                req.app.locals.message = 'A jelszó túl gyenge!'
+                req.app.locals.messagetype = 'danger'
+                res.redirect('/passmod')
+            }else{
+                pool.query('Select password from users where ID=?',[req.session.userid],(err,results)=>{
+                    if (err) {
+                        res.status(200).send(err.message)
+                    }
+                    else{
+                        if (sha1(req.body.pass1)==results[0].password) {
+                            req.app.locals.message = 'A jelszó megegyezik a régivel!'
+                            req.app.locals.messagetype = 'danger'
+                            res.redirect('/passmod')
+                        }
+                        else{
+                            pool.query('UPDATE users SET password=? WHERE ID=?',[sha1(req.body.pass1),req.session.userid],(err,results)=>{
+                                if (err) {
+                                    res.status(200).send(err.message)
+                                }
+                                else{
+                                    req.app.locals.message = 'Sikeres frissítés'
+                                    req.app.locals.messagetype = 'success'
+                                    res.redirect('/passmod')
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        }
+    }
+})
 module.exports = router;

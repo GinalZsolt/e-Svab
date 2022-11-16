@@ -7,8 +7,19 @@
     <script>
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
+          initialView: 'dayGridMonth',
+          events:[
+            <% for (let i = 0; i < calendardata.length; i++) {%>
+              {
+                id:'_<%=calendardata[i].spendingID%>',
+                title:'<%=calendardata[i].name%><%if(calendardata[i].diff==1){%> + <%}else{%> - <%}%><%=calendardata[i].amount%>Ft',
+                start:'<%=moment(calendardata[i].date).format("YYYY-MM-DD")%>',
+                allDay:true
+              },
+            <%}%>
+          ]
         });
         calendar.render();
+      
     </script>
 <%- include('footer') %> 
