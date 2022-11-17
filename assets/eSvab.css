@@ -64,3 +64,6 @@ footer {
     width: 80vw;
     margin:auto
 }
+.linechart{
+    max-width: 70vw;
+}

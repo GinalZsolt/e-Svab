@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Nov 15. 21:42
+-- Létrehozás ideje: 2022. Nov 17. 20:15
 -- Kiszolgáló verziója: 10.4.25-MariaDB
 -- PHP verzió: 8.1.10
 
@@ -99,7 +99,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `name`, `email`, `password`, `reg`, `status`) VALUES
-(1, 'admin', 'admin@admin.com', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', '2022-11-02', 1);
+(1, 'admin', 'admin@admin.com', '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8', '2022-11-02', 1),
+(2, 'ZickyXD', 'ciki@mehu.net', 'c7114c6ae22b5fa7e5c060f09aea7eb19c09b5c2', '2022-11-17', 1);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -145,7 +146,7 @@ ALTER TABLE `spendingtypes`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Megkötések a kiírt táblákhoz

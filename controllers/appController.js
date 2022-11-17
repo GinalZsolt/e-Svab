@@ -173,4 +173,24 @@ router.get('/profilmod',(req,res)=>{
     }
 })
 
+router.get('/balancechart',(req,res)=>{
+    if (req.session.loggedIn) {
+        if (!req.app.locals.isMessage) {
+            req.app.locals.message = ''
+        }
+        pool.query(`SELECT * FROM spendings INNER JOIN spendingtypes on spendings.typeID=spendingtypes.ID WHERE UID=${req.session.userid} order by date`,(err,results)=>{
+            if(err)res.send(err.message)
+            else{
+                ejs.renderFile('views/balancechart.ejs', { app: config.appconfig, err: req.app.locals,moment:moment, user: req.session, chartdata:results}, (err, data) => {
+                    if(err)res.send(err.message)
+                    req.app.locals.isMessage = false
+                    res.send(data)
+                });
+            }
+        })
+    } else {
+        res.redirect('/')
+    }
+})
+
 module.exports = router;

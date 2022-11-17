@@ -1,0 +1,68 @@
+<%- include('header') %> 
+
+<div class="chartBox linechart">
+    <canvas id="balancechart"></canvas>
+</div>
+
+
+<script src="/chart.js"></script>
+<script>
+
+//chartlabels 
+
+let chartlabels=[]
+
+<%for(let i=0;i<chartdata.length;i++){%>
+    chartlabels.push("<%=moment(chartdata[i].date).format('YYYY-MM-DD')%>")
+<%}%>
+
+//sums 
+
+let curr=0
+let sums=[]
+<%for(let i=0;i<chartdata.length;i++){%>
+   curr+=<%if(chartdata[i].diff==0){%> - <%}%>  <%=chartdata[i].amount%>
+   sums.push(curr)
+<%}%>
+
+//setup
+
+const data = {
+  labels: chartlabels,
+  datasets: [{
+    label: 'Egyenleg',
+    data: sums,
+    fill: false,
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.3
+  }]
+}
+
+//config
+
+const config = {
+  type: 'line',
+  data: data,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: false,
+        text: 'Egyenleg'
+      }
+    }
+  },
+};
+
+
+const myChart = new Chart(
+    document.getElementById('balancechart'),
+    config
+  );
+
+</script>
+
+<%- include('footer') %> 
