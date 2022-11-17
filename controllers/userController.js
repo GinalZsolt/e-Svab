@@ -33,7 +33,7 @@ router.post('/login',(req,res)=>{
                     req.session.loggedIn = true;
                     req.session.userid = results[0].ID;
                     req.session.username = results[0].name;
-                    req.session.useermail = results[0].email;
+                    req.session.usermail = results[0].email;
                     req.app.locals.message = 'Sikeres belépés!'
                     req.app.locals.messagetype = 'success'
                     res.redirect('/home')
@@ -148,6 +148,39 @@ router.post('/passmod',(req,res)=>{
                 })
             }
         }
+    }
+})
+
+router.post('/profilmod',(req,res)=>{
+    req.app.locals.isMessage = true
+    if (req.body.email==""|| req.body.name=="") {
+        req.app.locals.message = 'Nincs minden mező kitöltve'
+        req.app.locals.messagetype = 'danger'
+        res.redirect('/profilmod')
+    }
+    else{
+        pool.query("SELECT * FROM users WHERE email LIKE ?",[req.body.email],(err,results)=>{
+            if(err) res.send(err.message)
+            else{
+                if(results.length!=0){
+                    req.app.locals.message = 'Ez a cím már foglalt'
+                    req.app.locals.messagetype = 'danger'
+                    res.redirect('/profilmod')
+                }
+                else{
+                    pool.query(`UPDATE users SET name=?, email=? WHERE ID=?`,[req.body.name,req.body.email,req.session.userid],(err,results)=>{
+                        if(err) res.send(err.message)
+                        else{
+                            req.app.locals.message = 'Sikeres frissítés'
+                            req.app.locals.messagetype = 'success'
+                            req.session.username = req.body.name
+                            req.session.usermail = req.body.email
+                            res.redirect('/profilmod')
+                        }
+                    })
+                }
+            }  
+        })
     }
 })
 module.exports = router;

@@ -159,4 +159,18 @@ router.get('/passmod',(req,res)=>{
     }
 })
 
+router.get('/profilmod',(req,res)=>{
+    if (req.session.loggedIn) {
+        if (!req.app.locals.isMessage) {
+            req.app.locals.message = ''
+        }
+        ejs.renderFile('views/profilmod.ejs', { app: config.appconfig, err: req.app.locals, user: req.session }, (err, data) => {
+            req.app.locals.isMessage = false
+            res.send(data)
+        });
+    } else {
+        res.redirect('/')
+    }
+})
+
 module.exports = router;
