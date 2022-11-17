@@ -117,7 +117,7 @@ router.post('/passmod',(req,res)=>{
             res.redirect('/passmod')
         }
         else{
-            let pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+            let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
             if(!req.body.pass1==(pattern)){
                 req.app.locals.message = 'A jelszó túl gyenge!'
                 req.app.locals.messagetype = 'danger'
