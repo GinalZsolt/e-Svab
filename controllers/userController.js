@@ -70,8 +70,7 @@ router.post('/reg',(req,res)=>{
         res.redirect('/reg')
         }
         else{
-            let pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
-            if(!newuser.password==(pattern)){
+            if(!newuser.password.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/)){
                 req.app.locals.message = 'A jelszó túl gyenge!'
                 req.app.locals.messagetype = 'danger'
                 res.redirect('/reg')
@@ -117,8 +116,8 @@ router.post('/passmod',(req,res)=>{
             res.redirect('/passmod')
         }
         else{
-            let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
-            if(!req.body.pass1==(pattern)){
+           
+            if(!req.body.pass1.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/)){
                 req.app.locals.message = 'A jelszó túl gyenge!'
                 req.app.locals.messagetype = 'danger'
                 res.redirect('/passmod')
